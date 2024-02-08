@@ -1,0 +1,123 @@
+[gd_scene load_steps=8 format=3 uid="uid://c74gjwrl1mfl6"]
+
+[ext_resource type="Script" path="res://scripts/tag_football_game_manager.gd" id="1_g616q"]
+[ext_resource type="PackedScene" uid="uid://q3djwcbehltf" path="res://player.tscn" id="1_h32ea"]
+[ext_resource type="PackedScene" uid="uid://c1bxfrqruwx57" path="res://goal.tscn" id="1_nk3vf"]
+[ext_resource type="Theme" uid="uid://c3c13jfsyk6ja" path="res://ui_text_theme.tres" id="2_dnut8"]
+[ext_resource type="PackedScene" uid="uid://exhq8dd3nsqi" path="res://pickup.tscn" id="5_j6atf"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_eutgq"]
+size = Vector2(600, 2)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n8ao5"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_g616q")
+
+[node name="Score" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Control" type="HBoxContainer" parent="Score"]
+modulate = Color(1, 1, 1, 0.152941)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dnut8")
+alignment = 1
+
+[node name="P1Score" type="Label" parent="Score/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "10"
+horizontal_alignment = 2
+
+[node name="Control" type="Control" parent="Score/Control"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="P2Score" type="Label" parent="Score/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "12"
+horizontal_alignment = 2
+
+[node name="Terrain" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Terrain"]
+color = Color(0.756863, 0.756863, 0.756863, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Terrain"]
+offset_top = 1.0
+offset_right = 1200.0
+offset_bottom = 601.0
+color = Color(0.196078, 0.52549, 0.207843, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Terrain"]
+offset_top = -15.0
+offset_right = 1200.0
+offset_bottom = 585.0
+scale = Vector2(1, 0.0399998)
+color = Color(0.117647, 0.337255, 0.12549, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Terrain"]
+offset_top = 595.0
+offset_right = 1200.0
+offset_bottom = 1195.0
+scale = Vector2(1, 0.0399998)
+color = Color(0.117647, 0.337255, 0.12549, 1)
+
+[node name="Line" type="MeshInstance2D" parent="Terrain"]
+position = Vector2(600, 300)
+rotation = 1.5708
+mesh = SubResource("QuadMesh_eutgq")
+
+[node name="Player1_goal" parent="." instance=ExtResource("1_nk3vf")]
+
+[node name="Player2_goal" parent="." instance=ExtResource("1_nk3vf")]
+position = Vector2(1199, 300)
+rotation = -1.5708
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, 300)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_n8ao5")
+
+[node name="Right" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1200, 300)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_n8ao5")
+
+[node name="Top" type="CollisionShape2D" parent="Walls"]
+position = Vector2(600, 9)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_n8ao5")
+
+[node name="Bottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(600, 595)
+shape = SubResource("WorldBoundaryShape2D_n8ao5")
+
+[node name="Player1" parent="." instance=ExtResource("1_h32ea")]
+position = Vector2(300, 300)
+gravity_scale = 0.0
+
+[node name="Player2" parent="." instance=ExtResource("1_h32ea")]
+position = Vector2(900, 300)
+gravity_scale = 0.0
+player = &"p2"
+color = Color(0, 0, 1, 1)
+
+[node name="Pickup" parent="." instance=ExtResource("5_j6atf")]
+unique_name_in_owner = true
+position = Vector2(600, 300)
+
+[connection signal="body_entered" from="Player1_goal" to="." method="_on_player_1_goal_body_entered"]
+[connection signal="body_entered" from="Player2_goal" to="." method="_on_player_2_goal_body_entered"]
+[connection signal="body_entered" from="Pickup" to="." method="_on_pickup_body_entered"]

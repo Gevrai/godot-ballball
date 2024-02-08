@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://q3djwcbehltf"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_ql865"]
+[ext_resource type="PackedScene" uid="uid://cyfr308mvpuop" path="res://pickup_point_light.tscn" id="2_20mhl"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uigdt"]
+friction = 0.0
+bounce = 0.75
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hp0kk"]
+radius = 48.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_akwwh"]
+radius = 50.0
+height = 100.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_6skr6"]
+radius = 48.0
+height = 96.0
+
+[node name="Player" type="RigidBody2D" groups=["players"]]
+physics_material_override = SubResource("PhysicsMaterial_uigdt")
+can_sleep = false
+lock_rotation = true
+max_contacts_reported = 3
+contact_monitor = true
+linear_damp = 1.0
+script = ExtResource("1_ql865")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hp0kk")
+
+[node name="BallActiveOutline" type="MeshInstance2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 0, 1)
+mesh = SubResource("SphereMesh_akwwh")
+
+[node name="PointLight" parent="BallActiveOutline" instance=ExtResource("2_20mhl")]
+modulate = Color(1, 1, 1, 0.188466)
+
+[node name="Body" type="MeshInstance2D" parent="."]
+mesh = SubResource("SphereMesh_6skr6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

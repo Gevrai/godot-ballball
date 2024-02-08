@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyfr308mvpuop"]
+
+[ext_resource type="Texture2D" uid="uid://botqegyyglj38" path="res://assets/point_light.webp" id="1_svxcf"]
+[ext_resource type="Script" path="res://flickering_light.gd" id="2_7cxdd"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_idauc"]
+blend_mode = 1
+
+[node name="PointLight" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.188235)
+material = SubResource("CanvasItemMaterial_idauc")
+texture = ExtResource("1_svxcf")
+script = ExtResource("2_7cxdd")

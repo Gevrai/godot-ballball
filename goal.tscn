@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1bxfrqruwx57"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pekik"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_cnkpk"]
+size = Vector2(600, 2)
+
+[node name="Player1_goal" type="Area2D"]
+position = Vector2(1, 300)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_pekik")
+
+[node name="Line" type="MeshInstance2D" parent="."]
+position = Vector2(0, -100)
+mesh = SubResource("QuadMesh_cnkpk")
