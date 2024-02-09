@@ -49,14 +49,11 @@ horizontal_alignment = 2
 [node name="Terrain" type="CanvasLayer" parent="."]
 layer = -2
 
-[node name="CanvasModulate" type="CanvasModulate" parent="Terrain"]
-color = Color(0.756863, 0.756863, 0.756863, 1)
-
 [node name="ColorRect" type="ColorRect" parent="Terrain"]
 offset_top = 1.0
 offset_right = 1200.0
 offset_bottom = 601.0
-color = Color(0.196078, 0.52549, 0.207843, 1)
+color = Color(0.160784, 0.466667, 0.172549, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="Terrain"]
 offset_top = -15.0
@@ -104,12 +101,22 @@ shape = SubResource("WorldBoundaryShape2D_n8ao5")
 position = Vector2(600, 595)
 shape = SubResource("WorldBoundaryShape2D_n8ao5")
 
-[node name="Player1" parent="." instance=ExtResource("1_h32ea")]
-position = Vector2(300, 300)
+[node name="Player1_1" parent="." instance=ExtResource("1_h32ea")]
+position = Vector2(400, 150)
 gravity_scale = 0.0
 
-[node name="Player2" parent="." instance=ExtResource("1_h32ea")]
-position = Vector2(900, 300)
+[node name="Player1_2" parent="." instance=ExtResource("1_h32ea")]
+position = Vector2(300, 450)
+gravity_scale = 0.0
+
+[node name="Player2_1" parent="." instance=ExtResource("1_h32ea")]
+position = Vector2(900, 150)
+gravity_scale = 0.0
+player = &"p2"
+color = Color(0, 0, 1, 1)
+
+[node name="Player2_2" parent="." instance=ExtResource("1_h32ea")]
+position = Vector2(800, 450)
 gravity_scale = 0.0
 player = &"p2"
 color = Color(0, 0, 1, 1)

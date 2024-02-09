@@ -36,7 +36,7 @@ modulate = Color(1, 1, 0, 1)
 mesh = SubResource("SphereMesh_akwwh")
 
 [node name="PointLight" parent="BallActiveOutline" instance=ExtResource("2_20mhl")]
-modulate = Color(1, 1, 1, 0.188466)
+modulate = Color(1, 1, 1, 0.198188)
 
 [node name="Body" type="MeshInstance2D" parent="."]
 mesh = SubResource("SphereMesh_6skr6")
