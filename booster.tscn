@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://darcp7dbi4i5b"]
+
+[ext_resource type="Script" path="res://scripts/booster.gd" id="1_5tdwq"]
+
+[sub_resource type="Curve" id="Curve_4owm4"]
+max_value = 2.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.275472, 1.58164), 0.0, 0.0, 0, 0, Vector2(0.841509, 1.72929), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7nbuo"]
+size = Vector2(91, 151.5)
+
+[node name="Node2D" type="Node2D"]
+modulate = Color(1, 1, 0, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 128
+preprocess = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(40, 20)
+direction = Vector2(0, 1)
+spread = 5.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+radial_accel_min = -10.0
+radial_accel_max = 10.0
+scale_amount_min = 0.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_4owm4")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_5tdwq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 69.25)
+shape = SubResource("RectangleShape2D_7nbuo")

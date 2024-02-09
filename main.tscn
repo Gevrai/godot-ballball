@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c74gjwrl1mfl6"]
+[gd_scene load_steps=10 format=3 uid="uid://c74gjwrl1mfl6"]
 
 [ext_resource type="Script" path="res://scripts/tag_football_game_manager.gd" id="1_g616q"]
 [ext_resource type="PackedScene" uid="uid://q3djwcbehltf" path="res://player.tscn" id="1_h32ea"]
 [ext_resource type="PackedScene" uid="uid://c1bxfrqruwx57" path="res://goal.tscn" id="1_nk3vf"]
-[ext_resource type="Theme" uid="uid://c3c13jfsyk6ja" path="res://ui_text_theme.tres" id="2_dnut8"]
+[ext_resource type="Theme" uid="uid://c3c13jfsyk6ja" path="res://assets/ui_text_theme.tres" id="2_dnut8"]
+[ext_resource type="PackedScene" uid="uid://pgq2dm8p2fyl" path="res://circle.tscn" id="3_cyvta"]
 [ext_resource type="PackedScene" uid="uid://exhq8dd3nsqi" path="res://pickup.tscn" id="5_j6atf"]
+[ext_resource type="PackedScene" uid="uid://darcp7dbi4i5b" path="res://booster.tscn" id="6_px7f7"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_eutgq"]
 size = Vector2(600, 2)
@@ -69,6 +71,11 @@ offset_bottom = 1195.0
 scale = Vector2(1, 0.0399998)
 color = Color(0.117647, 0.337255, 0.12549, 1)
 
+[node name="Circle" parent="Terrain" instance=ExtResource("3_cyvta")]
+position = Vector2(600, 300)
+radius = 65.0
+segments = 64
+
 [node name="MidLine" type="MeshInstance2D" parent="Terrain"]
 position = Vector2(600, 300)
 rotation = 1.5708
@@ -124,6 +131,14 @@ color = Color(0, 0, 1, 1)
 [node name="Pickup" parent="." instance=ExtResource("5_j6atf")]
 unique_name_in_owner = true
 position = Vector2(600, 300)
+
+[node name="BoosterLeft" parent="." instance=ExtResource("6_px7f7")]
+position = Vector2(200, 50)
+rotation = -0.872665
+
+[node name="BoosterRight" parent="." instance=ExtResource("6_px7f7")]
+position = Vector2(1000, 550)
+rotation = -4.01426
 
 [connection signal="body_entered" from="Player1_goal" to="." method="_on_player_1_goal_body_entered"]
 [connection signal="body_entered" from="Player2_goal" to="." method="_on_player_2_goal_body_entered"]
